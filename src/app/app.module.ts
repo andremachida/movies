@@ -11,6 +11,7 @@ import { HttpModule } from '@angular/http'
 import { FeedPageModule } from '../pages/feed/feed.module';
 import { MovieProvider } from '../providers/movie/movie';
 import { DetailsPageModule } from '../pages/details/details.module';
+import { MoviesPageModule } from '../pages/movies/movies.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { DetailsPageModule } from '../pages/details/details.module';
     IonicModule.forRoot(MyApp),
     FeedPageModule,
     HttpModule,
-    DetailsPageModule
+    DetailsPageModule,
+    MoviesPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

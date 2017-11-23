@@ -22,4 +22,15 @@ export class MovieProvider {
   getMovieDetails(filmeid) {
     return this.http.get(this.baseApiPath + filmeid);
   }
+
+  addMovies(data) {
+    var config = {
+      headers:  {
+        'Accept': 'application/json, */*',
+        "Content-Type" : "application/json"
+      }
+    };
+
+    this.http.post(this.baseApiPath, data, config).subscribe();
+  }
 }
