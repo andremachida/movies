@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 import { MovieProvider } from '../../providers/movie/movie';
 import { DetailsPage } from '../details/details';
 import { MoviesPage } from '../movies/movies';
@@ -28,7 +28,13 @@ export class FeedPage {
   public refresher;
   public isRefreshing: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private movieProvider: MovieProvider, public loadingCtrl: LoadingController) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private movieProvider: MovieProvider,
+    public loadingCtrl: LoadingController,
+    private toastCtrl: ToastController
+  ) {
   }
 
   presentLoading() {
@@ -89,6 +95,16 @@ export class FeedPage {
 
   abrirDetalhes(filme) {
     this.navCtrl.push(DetailsPage, { id: filme._id });
+  }
+
+  delete(filme) {
+    this.movieProvider.deleteMovies(filme._id);
+    let toast = this.toastCtrl.create({
+      message: 'Deleted',
+      duration: 3000
+    });
+    toast.present();
+    this.navCtrl.setRoot(this.navCtrl.getActive().component);
   }
 
   inserirFilme() { 

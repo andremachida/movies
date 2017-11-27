@@ -12,8 +12,16 @@ import 'rxjs/add/operator/map';
 export class MovieProvider {
 
   private baseApiPath = "http://localhost:3003/api/moviesService/";
+  public http;
+  private config = {
+    headers:  {
+      'Accept': 'application/json, */*',
+      "Content-Type" : "application/json"
+    }
+  };
 
-  constructor(public http: Http) {
+  constructor(http: Http) {
+    this.http = http;
   }
 
   getMovies(page = 1) {
@@ -24,13 +32,10 @@ export class MovieProvider {
   }
 
   addMovies(data) {
-    var config = {
-      headers:  {
-        'Accept': 'application/json, */*',
-        "Content-Type" : "application/json"
-      }
-    };
+    this.http.post(this.baseApiPath, data, this.config).subscribe();
+  }
 
-    this.http.post(this.baseApiPath, data, config).subscribe();
+  deleteMovies(id) {
+    this.http.delete(this.baseApiPath, id, this.config).subscribe();
   }
 }
